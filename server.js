@@ -25,7 +25,7 @@ app.get('/api/equipos', (req, res) => {
 
 // Devuelve un equipo por su id
 app.get('/api/equipos/:id', (req, res) => {
-  const equipo = equipos.find((e) => e.id === req.params.id);
+  const equipo = equipos.find((e) => e.id ===Number(req.params.id));
 
   if (!equipo) {
     return res.status(404).json({ error: 'Equipo no encontrado' });
