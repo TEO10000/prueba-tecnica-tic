@@ -35,6 +35,18 @@ app.get('/api/equipos', (req, res) => {
 });
 
 // Devuelve un equipo por su id
+app.get('/api/equipos/resumen', (req, res) => {
+  const porEstado = equipos.reduce((conteo, equipo) => {
+    conteo[equipo.estado] = (conteo[equipo.estado] || 0) + 1;
+    return conteo;
+  }, {});
+
+  res.json({
+    total: equipos.length,
+    porEstado
+  });
+});
+
 app.get('/api/equipos/:id', (req, res) => {
   const equipo = equipos.find((e) => e.id ===Number(req.params.id));
 
