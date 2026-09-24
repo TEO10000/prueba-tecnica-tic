@@ -20,7 +20,18 @@ app.get('/api', (req, res) => {
 
 // Devuelve la lista completa de equipos
 app.get('/api/equipos', (req, res) => {
-  res.json(equipos);
+  const { estado } = req.query;
+  const {tipo} = req.query;
+  let equiposFiltrados = equipos;
+
+  if (estado) {
+    equiposFiltrados = equipos.filter((e) => e.estado === estado);
+  }
+  if (tipo) {
+    equiposFiltrados = equiposFiltrados.filter((e) => e.tipo === tipo);
+  }
+
+  res.json(equiposFiltrados);
 });
 
 // Devuelve un equipo por su id
